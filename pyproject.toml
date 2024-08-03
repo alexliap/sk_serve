@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/sautils/__init__.py"
+
+[project]
+name = "sk-serve"
+dynamic = ["version"]
+dependencies = [
+    "fastapi",
+    "pandas",
+    "scikit-learn"
+]
+
+requires-python = ">=3.12"
+authors = [
+  {name = "Alexandros Liapatis", email = "alexandrosliapatis@gmail.com"}
+]
+maintainers = [
+  {name = "Alexandros Liapatis", email = "alexandrosliapatis@gmail.com"}
+]
+description = "Support package for Satori AI packages"
+readme = "README.md"
+classifiers = [
+]
+
