@@ -1,4 +1,6 @@
 fastapi
-scikit-learn
+pandas
 pre-commit
+pydantic
 pyright
+scikit-learn

@@ -1,9 +1,10 @@
-from fastapi import FastAPI
 # import argparse
 # import uvicorn
 from api import SimpleAPI
+from fastapi import FastAPI
 
-def serve(pipeline_path : str, model_path: str):
+
+def serve(pipeline_path: str, model_path: str):
     """_summary_
 
     Args:
@@ -18,6 +19,7 @@ def serve(pipeline_path : str, model_path: str):
     app.include_router(api.routes)
 
     return app
+
 
 # def start_server(host: str = "localhost"):
 #     uvicorn.run("serve:app", host=host, port=8000, log_level="debug", reload=True)
