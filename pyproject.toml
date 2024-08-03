@@ -3,7 +3,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.version]
-path = "src/sautils/__init__.py"
+path = "src/sk_serve/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sk_serve"]
 
 [project]
 name = "sk-serve"
@@ -11,9 +14,9 @@ dynamic = ["version"]
 dependencies = [
     "fastapi",
     "pandas",
-    "scikit-learn"
+    "scikit-learn",
+    "pydantic"
 ]
-
 requires-python = ">=3.12"
 authors = [
   {name = "Alexandros Liapatis", email = "alexandrosliapatis@gmail.com"}
@@ -21,7 +24,17 @@ authors = [
 maintainers = [
   {name = "Alexandros Liapatis", email = "alexandrosliapatis@gmail.com"}
 ]
-description = "Support package for Satori AI packages"
+description = "Deployment of a Scikit-Learn model and it's column transformations with a single endpoint."
 readme = "README.md"
+license = {file = "LICENSE"}
 classifiers = [
 ]
+
+[project.optional-dependencies]
+dev = ["pre-commit", "pyright"]
+
+[project.urls]
+Homepage = ""
+Documentation = ""
+Repository = ""
+Issues = ""
