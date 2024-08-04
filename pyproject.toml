@@ -35,6 +35,6 @@ dev = ["pre-commit", "pyright"]
 
 [project.urls]
 Homepage = ""
-Documentation = ""
-Repository = ""
-Issues = ""
+Documentation = "https://alexliap.github.io/sk_serve/"
+Repository = "https://github.com/alexliap/sk_serve"
+Issues = "https://github.com/alexliap/sk_serve/issues"
