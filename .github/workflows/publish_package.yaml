@@ -31,7 +31,7 @@ jobs:
           run: hatch build
         - name: Publish package
           uses: pypa/gh-action-pypi-publish@release/v1
-          with:
-            repository-url: https://pypi.org/sk-serve/
-            user: __token__
-            password: ${{ secrets.PYPI_API_TOKEN }}
+        #   with:
+        #     repository-url: https://pypi.org/sk-serve/
+        #     user: __token__
+        #     password: ${{ secrets.PYPI_API_TOKEN }}
