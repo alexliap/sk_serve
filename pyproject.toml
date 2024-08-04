@@ -9,7 +9,7 @@ path = "src/sk_serve/__init__.py"
 packages = ["src/sk_serve"]
 
 [project]
-name = "sk-serve"
+name = "simple_serve"
 dynamic = ["version"]
 dependencies = [
     "fastapi",
@@ -27,14 +27,12 @@ maintainers = [
 description = "Deployment of a Scikit-Learn model and it's column transformations with a single endpoint."
 readme = "README.md"
 license = {file = "LICENSE"}
-classifiers = [
-]
 
 [project.optional-dependencies]
 dev = ["pre-commit", "pyright"]
 
 [project.urls]
-Homepage = ""
+Homepage = "https://github.com/alexliap/sk_serve"
 Documentation = "https://alexliap.github.io/sk_serve/"
 Repository = "https://github.com/alexliap/sk_serve"
 Issues = "https://github.com/alexliap/sk_serve/issues"
