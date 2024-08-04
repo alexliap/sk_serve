@@ -8,7 +8,10 @@ from sklearn.compose import ColumnTransformer
 
 
 class SimpleAPI:
-    """_summary_"""
+    """Simple API class that takes pipeline and model paths as arguments and defines one inference endpoint for
+    simple model deployment. Both loaded object must be Scikit-learn objects. It can also take a pydantic validation model
+    as input in order to validate the input everytime inference is requested.
+    """
 
     def __init__(
         self,
@@ -32,7 +35,7 @@ class SimpleAPI:
 
     @staticmethod
     def home() -> Dict[str, str]:
-        """Method that returns a message when accessing the `/` endpoint."""
+        """Method that returns a message when sending a GET request to the `/` endpoint."""
         home_message = (
             "This is a simple endpoint with a deployed scikit-learn model and pipeline. \
 Only available endpoints is: [POST] /inference."
@@ -41,16 +44,18 @@ Only available endpoints is: [POST] /inference."
         return {"message": home_message}
 
     def inference(self, inf_data: dict):
-        """_summary_
+        """Inference method that is used by the inference endpoint. In order to get the prediction
+        two checks are made beforehand: check if the pipeline is a `sklearn.compose.ColumnTransformer` object &
+        if the model loaded has `predict` method.
 
         Args:
-            inf_data (dict): _description_
+            inf_data (dict): Input data for inference. Currently only one data point at a time is supported.
 
         Raises:
-            RuntimeError: _description_
+            RuntimeError: If the model loaded doesn't have `predict` method.
 
         Returns:
-            _type_: _description_
+            dict: The prediction.
         """
         if self.validation_model is not None:
             self.validation_model.model_validate(inf_data)
@@ -80,15 +85,15 @@ Only available endpoints is: [POST] /inference."
         # get predictions
         preds = model.predict(trans_data)
 
-        return {"prediction": int(preds.item())}
+        return {"prediction": preds.item()}
 
     @staticmethod
     def _check_model_methods(model, method: str):
-        """_summary_
+        """Helper function that checks if a class method exits or not.
 
         Args:
-            model (_type_): _description_
-            method (str): _description_
+            model: A Scikit-learn model.
+            method (str): The name of the respective method.
         """
         try:
             method_name = getattr(model, method)

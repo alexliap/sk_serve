@@ -4,14 +4,13 @@ from .api import SimpleAPI
 
 
 def serve(simple_api: SimpleAPI):
-    """_summary_
+    """Function that constructs the model API.
 
     Args:
-        pipeline_path (str): _description_
-        model_path (str): _description_
+        simple_api (SimpleAPI): The SimpleAPI object needed for deployment.
 
     Returns:
-        _type_: _description_
+        app (FastAPI): The FastAPI application.
     """
     app = FastAPI()
     api = simple_api
