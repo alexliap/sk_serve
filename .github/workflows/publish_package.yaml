@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         environment:
             name: pypi
-            url: https://pypi.org/p/sk-serve
+            url: https://pypi.org/project/simple-serve
         permissions:
           id-token: write
 
