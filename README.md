@@ -1,6 +1,6 @@
 # sk-serve
 
-![deploy on pypi](https://github.com/alexliap/simple-serve/actions/workflows/publish-package.yaml/badge.svg)
+![deploy on pypi](https://github.com/alexliap/sk_serve/actions/workflows/publish_package.yaml/badge.svg)
 ![PyPI Version](https://img.shields.io/pypi/v/simple-serve?label=pypi%20package)
 
 Deployment of a Scikit-Learn model and it's column transformations with a single endpoint. Only a traditional Scikit-Learn model is needed and a ColumnTransformer object (sklearn.compose) to deploy your model. Validation of input data is also supported with pydantic.
