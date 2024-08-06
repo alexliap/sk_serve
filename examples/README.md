@@ -2,7 +2,7 @@
 
 ### Setup
 
-For the purposes of the guide we will use the famous "Titanic" dataset. The package is ready to use only when you have ready at your disposal a trained model and a preprocessing pipeline, a ColumnTransformer in our case.
+For the purposes of the guide we will use the famous "Titanic" dataset. The package is ready to use only when you have ready at your disposal a trained model and a preprocessing pipeline, a ColumnTransformer in our case. `produce_objects.py` will be ran to create our preprocessor + model.
 
 Suppose that our model and preprocessor are saved at "model.pkl" & "pipeline.pkl", respectively. After that minimal work is needed to deploy our inference endpoint (`uvincorn` is going to be needed to run the local server).
 
