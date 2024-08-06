@@ -1,4 +1,4 @@
-## Example
+## Usage Guide
 
 ### Setup
 
@@ -63,5 +63,7 @@ app = serve(api)
 if __name__ == "__main__":
     uvicorn.run("test_2:app", host="localhost", port=8000, log_level="debug", reload=True)
 ```
+
+The code example above is identical to `example_validation.py`, which you can run to serve the model.
 
 Now every time you send a request the payload will be validated before it is fed into the preprocessor and/or model.
