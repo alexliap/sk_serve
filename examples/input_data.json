@@ -1,0 +1,15 @@
+{
+  "pclass": 2,
+  "name": "Peltomaki, Mr. Nikolai Johannes",
+  "sex": "male",
+  "age": 25.0,
+  "sibsp": 1,
+  "parch": 0,
+  "ticket": "16966",
+  "fare": 134.5,
+  "cabin": "E40",
+  "embarked": "C",
+  "boat": 3,
+  "body": 294.0,
+  "home": "Plymouth, England"
+}

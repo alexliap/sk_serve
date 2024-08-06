@@ -5,6 +5,10 @@
 
 Deployment of a Scikit-Learn model and it's column transformations with a single endpoint. Only a traditional Scikit-Learn model is needed and a ColumnTransformer object (sklearn.compose) to deploy your model. Validation of input data is also supported with pydantic.
 
+### Usage
+
+See the [Examples](https://github.com/alexliap/sk_serve/tree/master/examples) section of the repository.
+
 ### Installation
 
 The package exists on PyPI (with a different name though) so you can install it directly to your environment by running the command
