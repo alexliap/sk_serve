@@ -65,9 +65,9 @@ Only available endpoints is: [POST] /inference."
         with open(self.pipeline_path, "rb") as pipeline_file:
             pipeline = pickle.load(pipeline_file)
             # make sure the pickle we loaded is a Pipeline object
-            assert isinstance(
-                pipeline, ColumnTransformer
-            ), "ColumnTransformer object loaded is not a `sklearn.compose.ColumnTransformer` object."
+            assert isinstance(pipeline, ColumnTransformer), (
+                "ColumnTransformer object loaded is not a `sklearn.compose.ColumnTransformer` object."
+            )
 
         with open(self.model_path, "rb") as model_file:
             model = pickle.load(model_file)
