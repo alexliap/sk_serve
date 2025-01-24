@@ -20,11 +20,15 @@ model = create_model(
     home=(str, None),
 )
 
-api = SimpleAPI("pipeline.pkl", "model.pkl", model)
+api = SimpleAPI("complete_pipeline.pkl", validation_model=model)
 
 app = serve(api)
 
 if __name__ == "__main__":
     uvicorn.run(
-        "test_2:app", host="localhost", port=8000, log_level="debug", reload=True
+        "example_validation:app",
+        host="localhost",
+        port=8000,
+        log_level="debug",
+        reload=True,
     )
