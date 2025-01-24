@@ -14,6 +14,7 @@ def serve(simple_api: SimpleAPI):
     """
     app = FastAPI()
     api = simple_api
-    app.include_router(api.routes)
-
+    app.include_router(
+        api.routes,
+    )
     return app
