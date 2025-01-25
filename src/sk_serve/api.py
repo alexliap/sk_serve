@@ -3,6 +3,7 @@ from typing import Dict, Union
 
 import pandas as pd
 from fastapi import APIRouter
+from loguru import logger
 from pydantic.main import BaseModel
 
 
@@ -39,33 +40,33 @@ class SimpleAPI:
 
     def inference(self, inf_data: dict):
         """Inference method that is used by the inference endpoint. In order to get the prediction
-        two checks are made beforehand:
+        the deployed pipeline must have the `predict` method.
 
         Args:
             inf_data (dict): Input data for inference. Currently only one data point at a time is supported.
 
-        Raises:
-            RuntimeError: If the model loaded doesn't have `predict` method.
-
         Returns:
             dict: The prediction.
         """
+        logger.info(inf_data)
+
         if self.validation_model is not None:
+            logger.info("Validation of requerst data ...")
             self.validation_model.model_validate(obj=inf_data)
 
         x_data = pd.DataFrame(inf_data, index=[0])
 
         with open(self.pipeline_path, "rb") as model_file:
+            logger.info("Loading deployed model ...")
             pipeline = pickle.load(model_file)
             try:
                 self._check_model_methods(pipeline, "predict")
             except Exception as e:
-                print(e)
-                raise RuntimeError(
-                    "The object that was loaded doesn't have `predict` method."
-                )
+                message = "The object that was loaded doesn't have `predict` method"
+                logger.error(f"{message}: -> {e}")
 
         # get predictions
+        logger.info("Get prediction ...")
         preds = pipeline.predict(x_data)
 
         return {"prediction": preds.item()}
@@ -81,6 +82,7 @@ class SimpleAPI:
         try:
             method_name = getattr(model, method)
         except Exception as e:
-            raise (e)
+            logger.error(e)
+            raise e
 
         assert callable(method_name)

@@ -2,20 +2,20 @@
 
 ### Setup
 
-For the purposes of the guide we will use the famous "Titanic" dataset. The package is ready to use only when you have ready at your disposal a trained model and a preprocessing pipeline, a ColumnTransformer in our case. `produce_objects.py` will be ran to create our preprocessor + model.
+For the purposes of the guide we will use the famous "Titanic" dataset. The package is ready to use only when you have at your disposal a fitted Scikit-Learn pipeline. `produce_objects.py` will be ran to create our pipeline.
 
-Suppose that our model and preprocessor are saved at "model.pkl" & "pipeline.pkl", respectively. After that minimal work is needed to deploy our inference endpoint (`uvincorn` is going to be needed to run the local server).
+Suppose the pipeline is saved as `complete_pipeline.pkl`. After that minimal work is needed to deploy our inference endpoint (`uvincorn` is going to be needed to run the local server).
 
 ```python
 import uvicorn
 from sk_serve import serve, SimpleAPI
 
-api = SimpleAPI("pipeline.pkl", "model.pkl")
+api = SimpleAPI("complete_pipeline.pkl")
 
 app = serve(api)
 
 if __name__ == "__main__":
-    uvicorn.run("test:app", host="localhost", port=8000, log_level="debug", reload=True)
+    uvicorn.run("example:app", host="localhost", port=8000, log_level="debug", reload=True)
 ```
 
 The code example above is identical to `example.py`, which you can run to serve the model.
@@ -30,10 +30,10 @@ import json
 
 with open('input_data.json') as f:
     # dummy row in order to call the endpoint
-    json = json.load(f)
+    data = json.load(f)
 
 url = "http://localhost:8000/inference"
-post_response = requests.post(url, json=json)
+post_response = requests.post(url, json=data)
 post_response.json()
 
 >>> {'prediction': '0'}
@@ -56,12 +56,12 @@ model = create_model(
     home=(str, None)
 )
 
-api = SimpleAPI("pipeline.pkl", "model.pkl", model)
+api = SimpleAPI("complete_pipeline.pkl", model)
 
 app = serve(api)
 
 if __name__ == "__main__":
-    uvicorn.run("test_2:app", host="localhost", port=8000, log_level="debug", reload=True)
+    uvicorn.run("example_validation:app", host="localhost", port=8000, log_level="debug", reload=True)
 ```
 
 The code example above is identical to `example_validation.py`, which you can run to serve the model.

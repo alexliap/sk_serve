@@ -51,16 +51,12 @@ preprocessor = ColumnTransformer(
 
 clf = LogisticRegression()
 
+pipeline = Pipeline([("feature_preporcessing", preprocessor), ("predictor", clf)])
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
 
-trans_data = preprocessor.fit_transform(x_train, y_train)
-
-clf.fit(trans_data, y_train)
+trans_data = pipeline.fit_transform(x_train, y_train)
 
 # save preprocessor
-with open("pipeline.pkl", "wb") as pipeline_file:
+with open("complete_pipeline.pkl", "wb") as pipeline_file:
     pickle.dump(preprocessor, pipeline_file)
-
-# save the model
-with open("model.pkl", "wb") as model_file:
-    pickle.dump(clf, model_file)

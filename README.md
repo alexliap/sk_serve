@@ -4,7 +4,7 @@
 ![PyPI Version](https://img.shields.io/pypi/v/simple-serve?label=pypi%20package)
 ![Downloads](https://static.pepy.tech/badge/simple-serve)
 
-Deployment of a Scikit-Learn model and it's column transformations with a single endpoint. Only a traditional Scikit-Learn model is needed and a ColumnTransformer object (sklearn.compose) to deploy your model. Validation of input data is also supported with pydantic.
+Deployment of a Scikit-Learn pipeline with a single endpoint. Validation of input data is also supported with pydantic.
 
 ### Usage
 
@@ -24,6 +24,7 @@ pip install simple-serve
 * fastapi
 * pandas
 * scikit-learn
+* loguru
 
 Additional packages for development:
 
