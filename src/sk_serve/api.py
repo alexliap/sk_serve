@@ -40,7 +40,7 @@ class SimpleAPI:
         the deployed pipeline must have the `predict` method.
 
         Args:
-            inf_data (dict): Input data for inference. Currently only one data point at a time is supported.
+            request (Request): Input data for inference. Currently only one data point at a time is supported.
 
         Returns:
             dict: The prediction.
