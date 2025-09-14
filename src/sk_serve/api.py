@@ -1,8 +1,7 @@
-import pickle
 from typing import Dict, Union
 
 import pandas as pd
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from loguru import logger
 from pydantic.main import BaseModel
 
@@ -15,11 +14,9 @@ class SimpleAPI:
 
     def __init__(
         self,
-        pipeline_path: str,
         validation_model: Union[type[BaseModel], None] = None,
     ):
         self.routes = APIRouter()
-        self.pipeline_path = pipeline_path
         self.validation_model = validation_model
 
         # add our only 2 endpoints
@@ -38,7 +35,7 @@ class SimpleAPI:
 
         return {"message": home_message}
 
-    def inference(self, inf_data: dict):
+    async def inference(self, request: Request):
         """Inference method that is used by the inference endpoint. In order to get the prediction
         the deployed pipeline must have the `predict` method.
 
@@ -48,41 +45,34 @@ class SimpleAPI:
         Returns:
             dict: The prediction.
         """
-        logger.info(inf_data)
+        data = await request.json()
+
+        logger.info(data)
 
         if self.validation_model is not None:
             logger.info("Validation of requerst data ...")
-            self.validation_model.model_validate(obj=inf_data)
+            self.validation_model.model_validate(obj=data)
 
-        x_data = pd.DataFrame(inf_data, index=[0])
-
-        with open(self.pipeline_path, "rb") as model_file:
-            logger.info("Loading deployed model ...")
-            pipeline = pickle.load(model_file)
-            try:
-                self._check_model_methods(pipeline, "predict")
-            except Exception as e:
-                message = "The object that was loaded doesn't have `predict` method"
-                logger.error(f"{message}: -> {e}")
+        x_data = pd.DataFrame(data, index=[0])
 
         # get predictions
-        logger.info("Get prediction ...")
-        preds = pipeline.predict(x_data)
+        logger.info("Getting prediction ...")
+        preds = request.app.state.pipeline.predict(x_data)
 
         return {"prediction": preds.item()}
 
-    @staticmethod
-    def _check_model_methods(model, method: str):
-        """Helper function that checks if a class method exits or not.
 
-        Args:
-            model: A Scikit-learn model.
-            method (str): The name of the respective method.
-        """
-        try:
-            method_name = getattr(model, method)
-        except Exception as e:
-            logger.error(e)
-            raise e
+def check_model_methods(model, method: str):
+    """Helper function that checks if a class method exits or not.
 
-        assert callable(method_name)
+    Args:
+        model: A Scikit-learn model.
+        method (str): The name of the respective method.
+    """
+    try:
+        method_name = getattr(model, method)
+    except Exception as e:
+        logger.error(e)
+        raise e
+
+    assert callable(method_name)

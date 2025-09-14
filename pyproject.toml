@@ -16,7 +16,8 @@ dependencies = [
     "pandas",
     "scikit-learn",
     "pydantic",
-    "loguru"
+    "loguru",
+    "uvicorn>=0.35.0",
 ]
 requires-python = ">=3.12"
 authors = [
