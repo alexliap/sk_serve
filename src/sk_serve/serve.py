@@ -1,8 +1,10 @@
-from fastapi import FastAPI
-import pickle
 import os
-from loguru import logger
+import pickle
 from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from loguru import logger
+
 from .api import SimpleAPI, check_model_methods
 
 
@@ -23,7 +25,7 @@ async def lifespan(app: FastAPI):
             message = "The object that was loaded doesn't have `predict` method"
             logger.error(f"{message}: -> {e}")
     yield
-    
+
     logger.info("👋 Shutting down...")
 
 
