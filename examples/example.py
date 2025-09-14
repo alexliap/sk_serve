@@ -1,8 +1,11 @@
 import uvicorn
+from dotenv import load_dotenv
 
 from sk_serve import SimpleAPI, serve
 
-api = SimpleAPI("complete_pipeline.pkl")
+load_dotenv()
+
+api = SimpleAPI()
 
 app = serve(api)
 

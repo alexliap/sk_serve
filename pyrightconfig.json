@@ -15,6 +15,12 @@
       "pythonVersion": "3.12",
       "pythonPlatform": "All",
       "extraPaths": [".venv/lib/python3.12/site-packages/"]
+    },
+    {
+      "root": "src/",
+      "pythonVersion": "3.12",
+      "pythonPlatform": "All",
+      "extraPaths": [".venv/Lib/site-packages/"]
     }
   ]
 }

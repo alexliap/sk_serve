@@ -1,7 +1,10 @@
 import uvicorn
+from dotenv import load_dotenv
 from pydantic import create_model
 
 from sk_serve import SimpleAPI, serve
+
+load_dotenv()
 
 model = create_model(
     "Model",
@@ -20,7 +23,7 @@ model = create_model(
     home=(str, None),
 )
 
-api = SimpleAPI("complete_pipeline.pkl", validation_model=model)
+api = SimpleAPI(validation_model=model)
 
 app = serve(api)
 
