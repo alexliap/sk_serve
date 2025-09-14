@@ -6,9 +6,7 @@
 sk-serve documentation
 ======================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+Deployment of a Scikit-Learn Pipeline made easy.
 
 
 .. toctree::
