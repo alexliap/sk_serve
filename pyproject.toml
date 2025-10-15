@@ -26,7 +26,7 @@ authors = [
 maintainers = [
   {name = "Alexandros Liapatis", email = "alexandrosliapatis@gmail.com"}
 ]
-description = "Deployment of a Scikit-Learn model and it's column transformations with a single endpoint."
+description = "Deployment of a Scikit-Learn pipeline with a single endpoint. Validation of input data is also supported with pydantic."
 readme = "README.md"
 license = {file = "LICENSE"}
 
