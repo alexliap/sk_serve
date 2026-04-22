@@ -159,3 +159,4 @@ cython_debug/
 .ruff_cache/
 *.pkl
 *.ipynb
+uv.lock

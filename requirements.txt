@@ -1,6 +1,0 @@
-fastapi
-pandas
-pre-commit
-pydantic
-pyright
-scikit-learn
