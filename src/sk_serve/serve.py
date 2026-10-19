@@ -1,7 +1,7 @@
 import os
 import pickle
 from contextlib import asynccontextmanager
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -32,7 +32,7 @@ def _register_pipeline(app: FastAPI, pipeline: Any) -> None:
         for m in _PREDICTION_METHODS
         if hasattr(pipeline, m) and callable(getattr(pipeline, m))
     ]
-    app.state.loaded_at = datetime.now(timezone.utc).isoformat()
+    app.state.loaded_at = datetime.now(UTC).isoformat()
     logger.info("✅ Model loaded")
 
 
